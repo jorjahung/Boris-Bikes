@@ -27,4 +27,26 @@ describe BikeContainer do
 		expect(lambda {holder.dock("gorilla")}).to raise_error(RuntimeError)
 	end
 
+	it "should be created empty" do
+		expect(holder).to be_empty
+	end
+
+	it "should return an inventory of all broken bikes" do
+		bike.break
+		holder.dock(bike)
+		expect(holder.broken_bikes).to eq([bike])
+		expect(holder.available_bikes.count).to eq(0)
+	end
+
+	it "should empty the broken bikes" do
+		bike2 = Bike.new
+		bike2.break
+		bike3 = Bike.new
+		holder.dock(bike)
+		holder.dock(bike3)
+		holder.dock(bike2)
+		expect(holder.give_broken_bikes).to eq([bike2])
+		expect(holder.available_bikes.count).to eq(2)
+	end
+
 end
