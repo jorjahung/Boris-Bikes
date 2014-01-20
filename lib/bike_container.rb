@@ -48,4 +48,8 @@ module BikeContainer
 	def give_broken_bikes
 		broken_bikes.each{|bike| release(bike)}
 	end
+
+	def give_working_bikes
+		available_bikes.each{|bike| release(bike)}
+	end
 end
