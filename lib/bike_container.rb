@@ -20,10 +20,12 @@ module BikeContainer
 
 	def dock(bike)
 		raise "Station is full" if full?
+		raise "Not a bike" if bike.class != Bike
 		bikes << bike
 	end
 
 	def release(bike)
+		raise "This bike is not in this container" if !bikes.include?(bike)
 		bikes.delete(bike)
 	end
 
